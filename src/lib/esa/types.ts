@@ -119,14 +119,6 @@ export const CreatePostParamsSchema = z.object({
 
 export const CreatePostResponseSchema = PostSchema;
 
-export const OriginalRevisionSchema = z.object({
-  body_md: z.string().describe("Original post content before changes."),
-  number: z.number().describe("Original revision number before changes."),
-  user: z
-    .string()
-    .describe("Screen name of the user who last updated the post."),
-});
-
 export const UpdatePostParamsSchema = z.object({
   post_number: z.number().min(1).describe("Post number to update (required)."),
   name: z
@@ -152,21 +144,6 @@ export const UpdatePostParamsSchema = z.object({
     .string()
     .optional()
     .describe("Commit message for the post update."),
-  created_by: z
-    .string()
-    .optional()
-    .describe(
-      "Override post creator (team owner only). Use screen_name or 'esa_bot'.",
-    ),
-  updated_by: z
-    .string()
-    .optional()
-    .describe(
-      "Override post updater (team owner only). Use screen_name or 'esa_bot'.",
-    ),
-  original_revision: OriginalRevisionSchema.optional().describe(
-    "Original revision data for 3-way merge conflict resolution.",
-  ),
 });
 
 export const UpdatePostResponseSchema = PostSchema.extend({
@@ -182,6 +159,5 @@ export type GetPostsResponse = z.infer<typeof GetPostsResponseSchema>;
 export type GetPostsParams = z.infer<typeof GetPostsParamsSchema>;
 export type CreatePostParams = z.infer<typeof CreatePostParamsSchema>;
 export type CreatePostResponse = z.infer<typeof CreatePostResponseSchema>;
-export type OriginalRevision = z.infer<typeof OriginalRevisionSchema>;
 export type UpdatePostParams = z.infer<typeof UpdatePostParamsSchema>;
 export type UpdatePostResponse = z.infer<typeof UpdatePostResponseSchema>;

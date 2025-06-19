@@ -57,7 +57,7 @@ Create a new post in the esa team. Requires a title and optionally accepts conte
 
 #### `update_post`
 
-Update an existing post in the esa team. Requires a post number and optionally accepts updated content, tags, category, WIP status, and other metadata. Supports 3-way merge for conflict resolution when multiple users edit the same post simultaneously. Returns the updated post information including revision details.
+Update an existing post in the esa team. Requires a post number and optionally accepts updated content, tags, category, WIP status, and other metadata. Returns the updated post information including revision details.
 
 ## License
 
