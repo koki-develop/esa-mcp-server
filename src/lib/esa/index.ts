@@ -36,7 +36,7 @@ export class Esa {
     CreatePostParamsSchema.parse(params);
 
     const response = await this._request({
-      path: path.join("v1/teams", this._teamName, "posts"),
+      path: `/v1/teams/${this._teamName}/posts`,
       method: "POST",
       body: { post: params },
     });
