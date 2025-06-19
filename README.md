@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/github/license/koki-develop/esa-mcp-server)](./LICENSE)
 [![Docker](https://img.shields.io/badge/docker-ghcr.io-blue.svg)](https://github.com/koki-develop/esa-mcp-server/pkgs/container/esa-mcp-server)
 
-This is a MCP server for [esa.io](https://esa.io).
+A Model Context Protocol (MCP) server for [esa.io](https://esa.io).
 
 ## Table of Contents
 
