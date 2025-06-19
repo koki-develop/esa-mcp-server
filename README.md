@@ -76,6 +76,7 @@ Update an existing post in the esa team. Requires a post number and optionally a
 #### `get_tags`
 
 Get a list of all tags used in the esa team. Returns tags with their names and the number of posts they are attached to, sorted by post count in descending order. Supports pagination.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
