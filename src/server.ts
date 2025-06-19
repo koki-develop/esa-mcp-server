@@ -6,7 +6,7 @@ import { registerTools } from "./mcp/tools";
 export async function runServer() {
   // Create MCP server
   const server = new McpServer({
-    name: "MCP_SERVER", // TODO: Change this to the name of the server
+    name: "esa",
     version: packageJson.version,
   });
 
