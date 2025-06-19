@@ -23,6 +23,12 @@ bun run lint
 bun run fmt
 ```
 
+### Testing
+```bash
+# Run MCP Inspector for manual testing
+bun run inspector
+```
+
 ### Dependency Management
 ```bash
 # Install dependencies
@@ -58,8 +64,22 @@ bun add -D <package-name>  # Development dependencies
 ### Current Implementation Status
 - Basic MCP server structure implemented
 - esa.io API client (`Esa` class) with Bearer auth
-- `get_posts` tool - fetches posts with filtering, sorting, pagination
 - Environment variables: `ESA_TEAM`, `ESA_ACCESS_TOKEN`
+
+#### Implemented Tools
+- `get_posts` - fetches posts with filtering, sorting, pagination
+- `get_post` - fetches specific post by number
+- `create_post` - creates new post
+- `update_post` - updates existing post
+- `delete_post` - deletes post
+- `get_tags` - fetches all tags
+- `get_post_comments` - fetches comments for a post
+
+#### TODO (from TODO file)
+- `--readonly` flag support
+- `create_post_comment` - create comment on post
+- `update_comment` - update existing comment
+- `delete_comment` - delete comment
 
 ## Important Notes
 - Code formatter is Biome (not ESLint)
@@ -67,3 +87,4 @@ bun add -D <package-name>  # Development dependencies
 - TypeScript strict mode enabled
 - Git hooks run Biome formatting on commit
 - All API inputs/outputs validated with Zod schemas
+- No test files exist yet - CI runs `bun test` but tests are not implemented
