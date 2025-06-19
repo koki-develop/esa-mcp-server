@@ -1,12 +1,10 @@
-**TODO: Replace `MCP_SERVER` with the name of the server**
+# Esa MCP Server
 
-# MCP_SERVER
+[![Version](https://img.shields.io/github/v/release/koki-develop/esa-mcp-server)](https://github.com/koki-develop/esa-mcp-server/releases/latest)
+[![License](https://img.shields.io/github/license/koki-develop/esa-mcp-server)](./LICENSE)
+[![Docker](https://img.shields.io/badge/docker-ghcr.io-blue.svg)](https://github.com/koki-develop/esa-mcp-server/pkgs/container/esa-mcp-server)
 
-<!-- [![Version](https://img.shields.io/github/v/release/koki-develop/MCP_SERVER)](https://github.com/koki-develop/MCP_SERVER/releases/latest)
-[![License](https://img.shields.io/github/license/koki-develop/MCP_SERVER)](./LICENSE)
-[![Docker](https://img.shields.io/badge/docker-ghcr.io-blue.svg)](https://github.com/koki-develop/MCP_SERVER/pkgs/container/MCP_SERVER) -->
-
-**TODO: Description**
+This is a MCP server for [esa.io](https://esa.io).
 
 ## Table of Contents
 
@@ -27,7 +25,7 @@ To use this server with an MCP client, add the following configuration:
         "run",
         "-i",
         "--rm",
-        "ghcr.io/koki-develop/MCP_SERVER:latest"
+        "ghcr.io/koki-develop/esa-mcp-server:latest"
       ]
     }
   }
