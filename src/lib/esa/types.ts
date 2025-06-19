@@ -153,6 +153,10 @@ export const UpdatePostResponseSchema = PostSchema.extend({
     .describe("True if 3-way merge conflicts occurred."),
 });
 
+export const DeletePostParamsSchema = z.object({
+  post_number: z.number().min(1).describe("Post number to delete (required)."),
+});
+
 export type User = z.infer<typeof UserSchema>;
 export type Post = z.infer<typeof PostSchema>;
 export type GetPostsResponse = z.infer<typeof GetPostsResponseSchema>;
@@ -193,3 +197,4 @@ export type CreatePostParams = z.infer<typeof CreatePostParamsSchema>;
 export type CreatePostResponse = z.infer<typeof CreatePostResponseSchema>;
 export type UpdatePostParams = z.infer<typeof UpdatePostParamsSchema>;
 export type UpdatePostResponse = z.infer<typeof UpdatePostResponseSchema>;
+export type DeletePostParams = z.infer<typeof DeletePostParamsSchema>;

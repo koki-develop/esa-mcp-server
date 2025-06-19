@@ -3,6 +3,7 @@ import {
   type CreatePostParams,
   type CreatePostResponse,
   CreatePostResponseSchema,
+  type DeletePostParams,
   type GetPostsParams,
   type GetPostsResponse,
   GetPostsResponseSchema,
@@ -66,6 +67,13 @@ export class Esa {
 
     const data = await response.json();
     return GetTagsResponseSchema.parse(data);
+  }
+
+  async deletePost(params: DeletePostParams): Promise<void> {
+    await this._request({
+      path: `/v1/teams/${this._teamName}/posts/${params.post_number}`,
+      method: "DELETE",
+    });
   }
   private async _request(params: {
     path: string;
