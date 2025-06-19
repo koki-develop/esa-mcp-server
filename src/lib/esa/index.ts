@@ -7,6 +7,9 @@ import {
   type GetPostCommentsParams,
   type GetPostCommentsResponse,
   GetPostCommentsResponseSchema,
+  type GetPostParams,
+  type GetPostResponse,
+  GetPostResponseSchema,
   type GetPostsParams,
   type GetPostsResponse,
   GetPostsResponseSchema,
@@ -36,6 +39,18 @@ export class Esa {
 
     const data = await response.json();
     return GetPostsResponseSchema.parse(data);
+  }
+
+  async getPost(params: GetPostParams): Promise<GetPostResponse> {
+    const { post_number, ...queryParams } = params;
+    const response = await this._request({
+      path: `/v1/teams/${this._teamName}/posts/${post_number}`,
+      method: "GET",
+      query: queryParams,
+    });
+
+    const data = await response.json();
+    return GetPostResponseSchema.parse(data);
   }
 
   async createPost(params: CreatePostParams): Promise<CreatePostResponse> {

@@ -23,6 +23,8 @@ export const PostSchema = z.object({
   updated_by: UserSchema,
   kind: z.enum(["stock", "flow"]),
   comments_count: z.number(),
+  tasks_count: z.number().optional(),
+  done_tasks_count: z.number().optional(),
   stargazers_count: z.number(),
   watchers_count: z.number(),
   star: z.boolean(),
@@ -83,6 +85,21 @@ export const GetPostsResponseSchema = z.object({
   page: z.number(),
   per_page: z.number(),
 });
+
+export const GetPostParamsSchema = z.object({
+  post_number: z
+    .number()
+    .min(1)
+    .describe("Post number to retrieve (required)."),
+  include: z
+    .string()
+    .optional()
+    .describe(
+      "Comma-separated list of additional data to include in response (e.g., 'comments', 'stargazers', 'comments,stargazers').",
+    ),
+});
+
+export const GetPostResponseSchema = PostSchema;
 
 export const CreatePostParamsSchema = z.object({
   name: z
@@ -236,6 +253,8 @@ export type GetPostCommentsParams = z.infer<typeof GetPostCommentsParamsSchema>;
 export type GetPostCommentsResponse = z.infer<
   typeof GetPostCommentsResponseSchema
 >;
+export type GetPostParams = z.infer<typeof GetPostParamsSchema>;
+export type GetPostResponse = z.infer<typeof GetPostResponseSchema>;
 export type CreatePostParams = z.infer<typeof CreatePostParamsSchema>;
 export type CreatePostResponse = z.infer<typeof CreatePostResponseSchema>;
 export type UpdatePostParams = z.infer<typeof UpdatePostParamsSchema>;

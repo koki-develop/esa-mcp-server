@@ -52,6 +52,7 @@ Replace `<your-team-name>` and `<your-personal-access-token>` with your team nam
 
 - [Posts](#posts)
   - [get_posts](#get_posts)
+  - [get_post](#get_post)
   - [create_post](#create_post)
   - [update_post](#update_post)
   - [delete_post](#delete_post)
@@ -65,6 +66,10 @@ Replace `<your-team-name>` and `<your-personal-access-token>` with your team nam
 #### `get_posts`
 
 Retrieve a list of posts from the esa team. Supports search queries, filtering, sorting, and pagination. Returns post metadata including title, content, tags, categories, author information, and engagement metrics (comments, stars, watches).
+
+#### `get_post`
+
+Retrieve a specific post from the esa team by post number. Returns complete post details including title, content (markdown), tags, category, author information, revision history, and engagement metrics. Optionally includes comments and stargazers.
 
 #### `create_post`
 

@@ -4,6 +4,7 @@ import {
   CreatePostParamsSchema,
   DeletePostParamsSchema,
   GetPostCommentsParamsSchema,
+  GetPostParamsSchema,
   GetPostsParamsSchema,
   GetTagsParamsSchema,
   UpdatePostParamsSchema,
@@ -19,6 +20,19 @@ export function registerTools(server: McpServer, esa: Esa) {
 
       return {
         content: [{ type: "text", text: JSON.stringify(posts) }],
+      };
+    },
+  );
+
+  server.tool(
+    "get_post",
+    "Retrieve a specific post from the esa team by post number. Returns complete post details including title, content (markdown), tags, category, author information, revision history, and engagement metrics. Optionally includes comments and stargazers.",
+    GetPostParamsSchema.shape,
+    async (params) => {
+      const post = await esa.getPost(params);
+
+      return {
+        content: [{ type: "text", text: JSON.stringify(post) }],
       };
     },
   );
