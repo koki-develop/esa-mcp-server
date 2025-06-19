@@ -1,0 +1,25 @@
+{
+  "name": "mcp-server",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "prepare": "husky || true",
+    "build": "bun run ./scripts/build.ts",
+    "lint": "biome check .",
+    "fmt": "biome check --write --unsafe .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.13.0",
+    "zod": "3.25.67"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.0.0",
+    "@types/bun": "1.2.16",
+    "husky": "9.1.7",
+    "lint-staged": "16.1.2",
+    "typescript": "5.8.3"
+  }
+}
