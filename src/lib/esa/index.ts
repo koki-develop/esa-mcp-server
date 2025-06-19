@@ -1,5 +1,8 @@
 import path from "node:path";
 import {
+  type CreatePostCommentParams,
+  type CreatePostCommentResponse,
+  CreatePostCommentResponseSchema,
   type CreatePostParams,
   type CreatePostResponse,
   CreatePostResponseSchema,
@@ -106,6 +109,20 @@ export class Esa {
 
     const data = await response.json();
     return GetPostCommentsResponseSchema.parse(data);
+  }
+
+  async createPostComment(
+    params: CreatePostCommentParams,
+  ): Promise<CreatePostCommentResponse> {
+    const { post_number, ...commentParams } = params;
+    const response = await this._request({
+      path: `/v1/teams/${this._teamName}/posts/${post_number}/comments`,
+      method: "POST",
+      body: { comment: commentParams },
+    });
+
+    const data = await response.json();
+    return CreatePostCommentResponseSchema.parse(data);
   }
   private async _request(params: {
     path: string;

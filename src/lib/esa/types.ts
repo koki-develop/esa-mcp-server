@@ -221,6 +221,19 @@ export const GetPostCommentsResponseSchema = z.object({
   per_page: z.number(),
   max_per_page: z.number(),
 });
+
+export const CreatePostCommentParamsSchema = z.object({
+  post_number: z
+    .number()
+    .min(1)
+    .describe("Post number to comment on (required)."),
+  body_md: z
+    .string()
+    .min(1)
+    .describe("Comment content in Markdown format (required)."),
+});
+
+export const CreatePostCommentResponseSchema = CommentSchema;
 export type User = z.infer<typeof UserSchema>;
 export type Post = z.infer<typeof PostSchema>;
 export type Comment = z.infer<typeof CommentSchema>;
@@ -270,3 +283,9 @@ export type CreatePostResponse = z.infer<typeof CreatePostResponseSchema>;
 export type UpdatePostParams = z.infer<typeof UpdatePostParamsSchema>;
 export type UpdatePostResponse = z.infer<typeof UpdatePostResponseSchema>;
 export type DeletePostParams = z.infer<typeof DeletePostParamsSchema>;
+export type CreatePostCommentParams = z.infer<
+  typeof CreatePostCommentParamsSchema
+>;
+export type CreatePostCommentResponse = z.infer<
+  typeof CreatePostCommentResponseSchema
+>;
