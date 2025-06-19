@@ -1,4 +1,10 @@
 import path from "node:path";
+import {
+  type GetPostsParams,
+  GetPostsParamsSchema,
+  type GetPostsResponse,
+  GetPostsResponseSchema,
+} from "./types.js";
 
 export class Esa {
   private readonly _teamName: string;
@@ -9,49 +15,34 @@ export class Esa {
     this._accessToken = config.accessToken;
   }
 
-  async getPosts() {
-    // TODO
-  }
+  async getPosts(params: GetPostsParams = {}): Promise<GetPostsResponse> {
+    GetPostsParamsSchema.parse(params);
 
-  async getPost() {
-    // TODO
-  }
+    const response = await this._request({
+      path: path.join("v1/teams", this._teamName, "posts"),
+      method: "GET",
+      query: params,
+    });
 
-  async createPost() {
-    // TODO
-  }
-
-  async updatePost() {
-    // TODO
-  }
-
-  async deletePost() {
-    // TODO
-  }
-
-  async getPostComments() {
-    // TODO
-  }
-
-  async createPostComment() {
-    // TODO
-  }
-
-  async updateComment() {
-    // TODO
-  }
-
-  async deleteComment() {
-    // TODO
+    const data = await response.json();
+    return GetPostsResponseSchema.parse(data);
   }
 
   private async _request(params: {
     path: string;
+    query?: Record<string, string | number>;
     method: string;
     options?: RequestInit;
   }): Promise<Response> {
     const url = new URL("https://api.esa.io");
-    url.pathname = path.join(url.pathname, "/v1", params.path);
+    url.pathname = path.join(url.pathname, params.path);
+    if (params.query) {
+      for (const [key, value] of Object.entries(params.query)) {
+        if (value) {
+          url.searchParams.set(key, value.toString());
+        }
+      }
+    }
 
     const response = await fetch(url, {
       method: params.method,
@@ -61,6 +52,7 @@ export class Esa {
       },
       ...params.options,
     });
+
     if (!response.ok) {
       const text = await response.text();
       throw new Error(text);
