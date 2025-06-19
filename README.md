@@ -10,6 +10,9 @@ A Model Context Protocol (MCP) server for [esa.io](https://esa.io).
 
 - [Usage](#usage)
 - [MCP Tools](#mcp-tools)
+  - [Posts](#posts)
+  - [Tags](#tags)
+  - [Comments](#comments)
 - [License](#license)
 
 ## Usage
@@ -84,15 +87,16 @@ Write operations (`create_post`, `update_post`, `delete_post`, `create_post_comm
 ## MCP Tools
 
 - [Posts](#posts)
-  - [get_posts](#get_posts)
-  - [get_post](#get_post)
-  - [create_post](#create_post)
-  - [update_post](#update_post)
-  - [delete_post](#delete_post)
+  - [`get_posts`](#get_posts)
+  - [`get_post`](#get_post)
+  - [`create_post`](#create_post)
+  - [`update_post`](#update_post)
+  - [`delete_post`](#delete_post)
 - [Tags](#tags)
-  - [get_tags](#get_tags)
+  - [`get_tags`](#get_tags)
 - [Comments](#comments)
-  - [get_post_comments](#get_post_comments)
+  - [`get_post_comments`](#get_post_comments)
+  - [`create_post_comment`](#create_post_comment)
 
 ### Posts
 
@@ -127,6 +131,10 @@ Get a list of all tags used in the esa team. Returns tags with their names and t
 #### `get_post_comments`
 
 Retrieve a list of comments for a specific post from the esa team. Requires a post number and supports pagination. Returns comment metadata including content, author information, timestamps, and engagement metrics (stars).
+
+#### `create_post_comment`
+
+Create a new comment on an existing post in the esa team. Requires a post number and comment content in Markdown format. Returns the created comment information including ID, content, timestamps, and author details.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
