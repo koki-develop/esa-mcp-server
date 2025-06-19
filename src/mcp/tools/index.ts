@@ -1,6 +1,9 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { Esa } from "../../lib/esa/index.js";
-import { GetPostsParamsSchema } from "../../lib/esa/types.js";
+import {
+  CreatePostParamsSchema,
+  GetPostsParamsSchema,
+} from "../../lib/esa/types.js";
 
 export function registerTools(server: McpServer, esa: Esa) {
   server.tool(
@@ -12,6 +15,19 @@ export function registerTools(server: McpServer, esa: Esa) {
 
       return {
         content: [{ type: "text", text: JSON.stringify(posts) }],
+      };
+    },
+  );
+
+  server.tool(
+    "create_post",
+    "Create a new post in the esa team. Requires a title and optionally accepts content, tags, category, WIP status, and other metadata. Returns the created post information including the assigned post number and URL.",
+    CreatePostParamsSchema.shape,
+    async (params) => {
+      const post = await esa.createPost(params);
+
+      return {
+        content: [{ type: "text", text: JSON.stringify(post) }],
       };
     },
   );

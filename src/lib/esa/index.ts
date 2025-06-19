@@ -1,5 +1,9 @@
 import path from "node:path";
 import {
+  type CreatePostParams,
+  CreatePostParamsSchema,
+  type CreatePostResponse,
+  CreatePostResponseSchema,
   type GetPostsParams,
   GetPostsParamsSchema,
   type GetPostsResponse,
@@ -28,10 +32,24 @@ export class Esa {
     return GetPostsResponseSchema.parse(data);
   }
 
+  async createPost(params: CreatePostParams): Promise<CreatePostResponse> {
+    CreatePostParamsSchema.parse(params);
+
+    const response = await this._request({
+      path: `/v1/teams/${this._teamName}/posts`,
+      method: "POST",
+      body: { post: params },
+    });
+
+    const data = await response.json();
+    return CreatePostResponseSchema.parse(data);
+  }
+
   private async _request(params: {
     path: string;
     query?: Record<string, string | number>;
     method: string;
+    body?: Record<string, unknown>;
     options?: RequestInit;
   }): Promise<Response> {
     const url = new URL("https://api.esa.io");
@@ -50,6 +68,7 @@ export class Esa {
         Authorization: `Bearer ${this._accessToken}`,
         "Content-Type": "application/json",
       },
+      body: params.body ? JSON.stringify(params.body) : undefined,
       ...params.options,
     });
 
