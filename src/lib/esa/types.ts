@@ -84,7 +84,44 @@ export const GetPostsResponseSchema = z.object({
   per_page: z.number(),
 });
 
+export const CreatePostParamsSchema = z.object({
+  name: z
+    .string()
+    .min(1)
+    .describe(
+      "Post title (required). Use &#35; for # and &#47; for / if needed in title.",
+    ),
+  body_md: z.string().optional().describe("Post content in Markdown format."),
+  tags: z
+    .array(z.string())
+    .optional()
+    .describe("Array of tags to be attached to the post."),
+  category: z
+    .string()
+    .optional()
+    .describe("Category path for the post (e.g., 'dev/2024/01/01')."),
+  wip: z
+    .boolean()
+    .optional()
+    .default(true)
+    .describe(
+      "Whether the post is in WIP (Work in Progress) state. Defaults to true.",
+    ),
+  message: z
+    .string()
+    .optional()
+    .describe("Commit message for the post update."),
+  template_post_id: z
+    .number()
+    .optional()
+    .describe("Template post ID to apply to this post."),
+});
+
+export const CreatePostResponseSchema = PostSchema;
+
 export type User = z.infer<typeof UserSchema>;
 export type Post = z.infer<typeof PostSchema>;
 export type GetPostsResponse = z.infer<typeof GetPostsResponseSchema>;
 export type GetPostsParams = z.infer<typeof GetPostsParamsSchema>;
+export type CreatePostParams = z.infer<typeof CreatePostParamsSchema>;
+export type CreatePostResponse = z.infer<typeof CreatePostResponseSchema>;
