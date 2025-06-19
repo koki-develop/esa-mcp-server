@@ -3,8 +3,8 @@ import type { Esa } from "../../lib/esa/index.js";
 import {
   CreatePostParamsSchema,
   GetPostsParamsSchema,
-  UpdatePostParamsSchema,
   GetTagsParamsSchema,
+  UpdatePostParamsSchema,
 } from "../../lib/esa/types.js";
 
 export function registerTools(server: McpServer, esa: Esa) {
