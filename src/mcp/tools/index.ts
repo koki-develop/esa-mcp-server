@@ -2,6 +2,7 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { Esa } from "../../lib/esa/index.js";
 import {
   CreatePostParamsSchema,
+  DeletePostParamsSchema,
   GetPostsParamsSchema,
   GetTagsParamsSchema,
   UpdatePostParamsSchema,
@@ -46,7 +47,6 @@ export function registerTools(server: McpServer, esa: Esa) {
       };
     },
   );
-
   server.tool(
     "get_tags",
     "Get a list of all tags used in the esa team. Returns tags with their names and the number of posts they are attached to, sorted by post count in descending order. Supports pagination.",
@@ -56,6 +56,24 @@ export function registerTools(server: McpServer, esa: Esa) {
 
       return {
         content: [{ type: "text", text: JSON.stringify(tags) }],
+      };
+    },
+  );
+
+  server.tool(
+    "delete_post",
+    "Delete an existing post from the esa team. Requires a post number. The post will be permanently deleted and cannot be recovered.",
+    DeletePostParamsSchema.shape,
+    async (params) => {
+      await esa.deletePost(params);
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Post #${params.post_number} has been successfully deleted.`,
+          },
+        ],
       };
     },
   );
