@@ -42,12 +42,17 @@ Replace `<your-team-name>` and `<your-access-token>` with your team name and acc
 
 - [Posts](#posts)
   - [get_posts](#get_posts)
+  - [create_post](#create_post)
 
 ### Posts
 
 #### `get_posts`
 
 Retrieve a list of posts from the esa team. Supports search queries, filtering, sorting, and pagination. Returns post metadata including title, content, tags, categories, author information, and engagement metrics (comments, stars, watches).
+
+#### `create_post`
+
+Create a new post in the esa team. Requires a title and optionally accepts content, tags, category, WIP status, and other metadata. Returns the created post information including the assigned post number and URL.
 
 ## License
 
