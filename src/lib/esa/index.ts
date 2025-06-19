@@ -8,6 +8,10 @@ import {
   GetPostsParamsSchema,
   type GetPostsResponse,
   GetPostsResponseSchema,
+  type UpdatePostParams,
+  UpdatePostParamsSchema,
+  type UpdatePostResponse,
+  UpdatePostResponseSchema,
 } from "./types.js";
 
 export class Esa {
@@ -43,6 +47,20 @@ export class Esa {
 
     const data = await response.json();
     return CreatePostResponseSchema.parse(data);
+  }
+
+  async updatePost(params: UpdatePostParams): Promise<UpdatePostResponse> {
+    UpdatePostParamsSchema.parse(params);
+
+    const { post_number, ...postParams } = params;
+    const response = await this._request({
+      path: `/v1/teams/${this._teamName}/posts/${post_number}`,
+      method: "PATCH",
+      body: { post: postParams },
+    });
+
+    const data = await response.json();
+    return UpdatePostResponseSchema.parse(data);
   }
 
   private async _request(params: {
