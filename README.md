@@ -14,6 +14,16 @@ A Model Context Protocol (MCP) server for [esa.io](https://esa.io).
 
 ## Usage
 
+### Prerequisites
+
+Before using this MCP server, you need to generate a personal access token from your esa.io team:
+
+1. Go to `https://<TEAM_NAME>.esa.io/user/applications`
+2. Create a new personal access token
+3. Copy the token for configuration
+
+### Configuration
+
 To use this server with an MCP client, add the following configuration:
 
 ```json
@@ -28,7 +38,7 @@ To use this server with an MCP client, add the following configuration:
         "-e",
         "ESA_TEAM=<your-team-name>",
         "-e",
-        "ESA_ACCESS_TOKEN=<your-access-token>",
+        "ESA_ACCESS_TOKEN=<your-personal-access-token>",
         "ghcr.io/koki-develop/esa-mcp-server:latest"
       ]
     }
@@ -36,7 +46,7 @@ To use this server with an MCP client, add the following configuration:
 }
 ```
 
-Replace `<your-team-name>` and `<your-access-token>` with your team name and access token.
+Replace `<your-team-name>` and `<your-personal-access-token>` with your team name and personal access token.
 
 ## MCP Tools
 
