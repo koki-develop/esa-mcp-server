@@ -6,6 +6,23 @@ export const UserSchema = z.object({
   screen_name: z.string(),
 });
 
+export const CommentSchema = z.object({
+  id: z.number(),
+  body_md: z.string(),
+  created_at: z.string(),
+  updated_at: z.string(),
+  url: z.string(),
+  created_by: UserSchema,
+  stargazers_count: z.number(),
+  star: z.boolean(),
+});
+
+export const StargazerSchema = z.object({
+  created_at: z.string(),
+  body: z.string().nullable(),
+  user: UserSchema,
+});
+
 export const PostSchema = z.object({
   number: z.number(),
   url: z.string(),
@@ -29,6 +46,8 @@ export const PostSchema = z.object({
   watchers_count: z.number(),
   star: z.boolean(),
   watch: z.boolean(),
+  comments: z.array(CommentSchema).optional(),
+  stargazers: z.array(StargazerSchema).optional(),
 });
 
 export const GetPostsParamsSchema = z.object({
@@ -174,17 +193,6 @@ export const DeletePostParamsSchema = z.object({
   post_number: z.number().min(1).describe("Post number to delete (required)."),
 });
 
-export const CommentSchema = z.object({
-  id: z.number(),
-  body_md: z.string(),
-  created_at: z.string(),
-  updated_at: z.string(),
-  url: z.string(),
-  created_by: UserSchema,
-  stargazers_count: z.number(),
-  star: z.boolean(),
-});
-
 export const GetPostCommentsParamsSchema = z.object({
   post_number: z
     .number()
@@ -215,6 +223,7 @@ export const GetPostCommentsResponseSchema = z.object({
 export type User = z.infer<typeof UserSchema>;
 export type Post = z.infer<typeof PostSchema>;
 export type Comment = z.infer<typeof CommentSchema>;
+export type Stargazer = z.infer<typeof StargazerSchema>;
 export type GetPostsResponse = z.infer<typeof GetPostsResponseSchema>;
 export const TagSchema = z.object({
   name: z.string(),
