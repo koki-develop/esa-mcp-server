@@ -19,7 +19,7 @@ To use this server with an MCP client, add the following configuration:
 ```json
 {
   "mcpServers": {
-    "todoist": {
+    "esa": {
       "command": "docker",
       "args": [
         "run",
