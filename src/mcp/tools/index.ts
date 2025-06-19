@@ -13,7 +13,7 @@ import {
 export function registerTools(server: McpServer, esa: Esa) {
   server.tool(
     "get_posts",
-    "Retrieve a list of posts from the esa team. Supports search queries, filtering, sorting, and pagination. Returns post metadata including title, content, tags, categories, author information, and engagement metrics (comments, stars, watches).",
+    "Retrieve a list of posts from the esa team. Supports search queries, filtering, sorting, and pagination. Returns post metadata including title, content, tags, categories, author information, and engagement metrics (comments, stars, watches). Optionally includes comments and stargazers with the include parameter.",
     GetPostsParamsSchema.shape,
     async (params) => {
       const posts = await esa.getPosts(params);
