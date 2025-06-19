@@ -48,6 +48,39 @@ To use this server with an MCP client, add the following configuration:
 
 Replace `<your-team-name>` and `<your-personal-access-token>` with your team name and personal access token.
 
+#### Read-only Mode
+
+To enable read-only mode that only allows read operations, add the `--readonly` flag:
+
+```json
+{
+  "mcpServers": {
+    "esa-readonly": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "ESA_TEAM=<your-team-name>",
+        "-e",
+        "ESA_ACCESS_TOKEN=<your-personal-access-token>",
+        "ghcr.io/koki-develop/esa-mcp-server:latest",
+        "--readonly"
+      ]
+    }
+  }
+}
+```
+
+In read-only mode, only the following operations are available:
+- `get_posts` - retrieve posts
+- `get_post` - retrieve a specific post
+- `get_tags` - retrieve tags
+- `get_post_comments` - retrieve post comments
+
+Write operations (`create_post`, `update_post`, `delete_post`, `create_post_comment`) are disabled.
+
 ## MCP Tools
 
 - [Posts](#posts)
