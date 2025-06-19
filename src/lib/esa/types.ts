@@ -157,8 +157,47 @@ export const DeletePostParamsSchema = z.object({
   post_number: z.number().min(1).describe("Post number to delete (required)."),
 });
 
+export const CommentSchema = z.object({
+  id: z.number(),
+  body_md: z.string(),
+  created_at: z.string(),
+  updated_at: z.string(),
+  url: z.string(),
+  created_by: UserSchema,
+  stargazers_count: z.number(),
+  star: z.boolean(),
+});
+
+export const GetPostCommentsParamsSchema = z.object({
+  post_number: z
+    .number()
+    .min(1)
+    .describe("Post number to get comments for (required)."),
+  page: z
+    .number()
+    .min(1)
+    .optional()
+    .describe("Page number for pagination. Starts from 1."),
+  per_page: z
+    .number()
+    .min(1)
+    .max(100)
+    .optional()
+    .describe("Number of comments per page. Range: 1-100, default is 20."),
+});
+
+export const GetPostCommentsResponseSchema = z.object({
+  comments: z.array(CommentSchema),
+  prev_page: z.number().nullable(),
+  next_page: z.number().nullable(),
+  total_count: z.number(),
+  page: z.number(),
+  per_page: z.number(),
+  max_per_page: z.number(),
+});
 export type User = z.infer<typeof UserSchema>;
 export type Post = z.infer<typeof PostSchema>;
+export type Comment = z.infer<typeof CommentSchema>;
 export type GetPostsResponse = z.infer<typeof GetPostsResponseSchema>;
 export const TagSchema = z.object({
   name: z.string(),
@@ -193,6 +232,10 @@ export type Tag = z.infer<typeof TagSchema>;
 export type GetTagsParams = z.infer<typeof GetTagsParamsSchema>;
 export type GetTagsResponse = z.infer<typeof GetTagsResponseSchema>;
 export type GetPostsParams = z.infer<typeof GetPostsParamsSchema>;
+export type GetPostCommentsParams = z.infer<typeof GetPostCommentsParamsSchema>;
+export type GetPostCommentsResponse = z.infer<
+  typeof GetPostCommentsResponseSchema
+>;
 export type CreatePostParams = z.infer<typeof CreatePostParamsSchema>;
 export type CreatePostResponse = z.infer<typeof CreatePostResponseSchema>;
 export type UpdatePostParams = z.infer<typeof UpdatePostParamsSchema>;

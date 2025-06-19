@@ -57,6 +57,8 @@ Replace `<your-team-name>` and `<your-personal-access-token>` with your team nam
   - [delete_post](#delete_post)
 - [Tags](#tags)
   - [get_tags](#get_tags)
+- [Comments](#comments)
+  - [get_post_comments](#get_post_comments)
 
 ### Posts
 
@@ -81,6 +83,12 @@ Delete an existing post from the esa team. Requires a post number. The post will
 #### `get_tags`
 
 Get a list of all tags used in the esa team. Returns tags with their names and the number of posts they are attached to, sorted by post count in descending order. Supports pagination.
+
+### Comments
+
+#### `get_post_comments`
+
+Retrieve a list of comments for a specific post from the esa team. Requires a post number and supports pagination. Returns comment metadata including content, author information, timestamps, and engagement metrics (stars).
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

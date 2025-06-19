@@ -4,6 +4,9 @@ import {
   type CreatePostResponse,
   CreatePostResponseSchema,
   type DeletePostParams,
+  type GetPostCommentsParams,
+  type GetPostCommentsResponse,
+  GetPostCommentsResponseSchema,
   type GetPostsParams,
   type GetPostsResponse,
   GetPostsResponseSchema,
@@ -74,6 +77,20 @@ export class Esa {
       path: `/v1/teams/${this._teamName}/posts/${params.post_number}`,
       method: "DELETE",
     });
+  }
+
+  async getPostComments(
+    params: GetPostCommentsParams,
+  ): Promise<GetPostCommentsResponse> {
+    const { post_number, ...queryParams } = params;
+    const response = await this._request({
+      path: `/v1/teams/${this._teamName}/posts/${post_number}/comments`,
+      method: "GET",
+      query: queryParams,
+    });
+
+    const data = await response.json();
+    return GetPostCommentsResponseSchema.parse(data);
   }
   private async _request(params: {
     path: string;

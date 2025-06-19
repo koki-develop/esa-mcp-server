@@ -3,6 +3,7 @@ import type { Esa } from "../../lib/esa/index.js";
 import {
   CreatePostParamsSchema,
   DeletePostParamsSchema,
+  GetPostCommentsParamsSchema,
   GetPostsParamsSchema,
   GetTagsParamsSchema,
   UpdatePostParamsSchema,
@@ -74,6 +75,19 @@ export function registerTools(server: McpServer, esa: Esa) {
             text: `Post #${params.post_number} has been successfully deleted.`,
           },
         ],
+      };
+    },
+  );
+
+  server.tool(
+    "get_post_comments",
+    "Retrieve a list of comments for a specific post from the esa team. Requires a post number and supports pagination. Returns comment metadata including content, author information, timestamps, and engagement metrics (stars).",
+    GetPostCommentsParamsSchema.shape,
+    async (params) => {
+      const comments = await esa.getPostComments(params);
+
+      return {
+        content: [{ type: "text", text: JSON.stringify(comments) }],
       };
     },
   );
