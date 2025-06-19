@@ -25,12 +25,18 @@ To use this server with an MCP client, add the following configuration:
         "run",
         "-i",
         "--rm",
+        "-e",
+        "ESA_TEAM=<your-team-name>",
+        "-e",
+        "ESA_ACCESS_TOKEN=<your-access-token>",
         "ghcr.io/koki-develop/esa-mcp-server:latest"
       ]
     }
   }
 }
 ```
+
+Replace `<your-team-name>` and `<your-access-token>` with your team name and access token.
 
 ## MCP Tools
 
