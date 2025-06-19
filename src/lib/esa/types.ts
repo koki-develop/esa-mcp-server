@@ -156,6 +156,38 @@ export const UpdatePostResponseSchema = PostSchema.extend({
 export type User = z.infer<typeof UserSchema>;
 export type Post = z.infer<typeof PostSchema>;
 export type GetPostsResponse = z.infer<typeof GetPostsResponseSchema>;
+export const TagSchema = z.object({
+  name: z.string(),
+  posts_count: z.number(),
+});
+
+export const GetTagsParamsSchema = z.object({
+  page: z
+    .number()
+    .min(1)
+    .optional()
+    .describe("Page number for pagination. Starts from 1."),
+  per_page: z
+    .number()
+    .min(1)
+    .max(1000)
+    .optional()
+    .describe("Number of tags per page. Range: 1-1000, default is 1000."),
+});
+
+export const GetTagsResponseSchema = z.object({
+  tags: z.array(TagSchema),
+  prev_page: z.number().nullable(),
+  next_page: z.number().nullable(),
+  total_count: z.number(),
+  page: z.number(),
+  per_page: z.number(),
+  max_per_page: z.number(),
+});
+
+export type Tag = z.infer<typeof TagSchema>;
+export type GetTagsParams = z.infer<typeof GetTagsParamsSchema>;
+export type GetTagsResponse = z.infer<typeof GetTagsResponseSchema>;
 export type GetPostsParams = z.infer<typeof GetPostsParamsSchema>;
 export type CreatePostParams = z.infer<typeof CreatePostParamsSchema>;
 export type CreatePostResponse = z.infer<typeof CreatePostResponseSchema>;
