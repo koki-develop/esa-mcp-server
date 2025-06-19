@@ -53,6 +53,7 @@ Replace `<your-team-name>` and `<your-personal-access-token>` with your team nam
 - [Posts](#posts)
   - [get_posts](#get_posts)
   - [create_post](#create_post)
+  - [update_post](#update_post)
 
 ### Posts
 
@@ -63,6 +64,10 @@ Retrieve a list of posts from the esa team. Supports search queries, filtering, 
 #### `create_post`
 
 Create a new post in the esa team. Requires a title and optionally accepts content, tags, category, WIP status, and other metadata. Returns the created post information including the assigned post number and URL.
+
+#### `update_post`
+
+Update an existing post in the esa team. Requires a post number and optionally accepts updated content, tags, category, WIP status, and other metadata. Returns the updated post information including revision details.
 
 ## License
 

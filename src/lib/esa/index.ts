@@ -1,13 +1,14 @@
 import path from "node:path";
 import {
   type CreatePostParams,
-  CreatePostParamsSchema,
   type CreatePostResponse,
   CreatePostResponseSchema,
   type GetPostsParams,
-  GetPostsParamsSchema,
   type GetPostsResponse,
   GetPostsResponseSchema,
+  type UpdatePostParams,
+  type UpdatePostResponse,
+  UpdatePostResponseSchema,
 } from "./types.js";
 
 export class Esa {
@@ -20,8 +21,6 @@ export class Esa {
   }
 
   async getPosts(params: GetPostsParams = {}): Promise<GetPostsResponse> {
-    GetPostsParamsSchema.parse(params);
-
     const response = await this._request({
       path: path.join("v1/teams", this._teamName, "posts"),
       method: "GET",
@@ -33,8 +32,6 @@ export class Esa {
   }
 
   async createPost(params: CreatePostParams): Promise<CreatePostResponse> {
-    CreatePostParamsSchema.parse(params);
-
     const response = await this._request({
       path: `/v1/teams/${this._teamName}/posts`,
       method: "POST",
@@ -43,6 +40,18 @@ export class Esa {
 
     const data = await response.json();
     return CreatePostResponseSchema.parse(data);
+  }
+
+  async updatePost(params: UpdatePostParams): Promise<UpdatePostResponse> {
+    const { post_number, ...postParams } = params;
+    const response = await this._request({
+      path: `/v1/teams/${this._teamName}/posts/${post_number}`,
+      method: "PATCH",
+      body: { post: postParams },
+    });
+
+    const data = await response.json();
+    return UpdatePostResponseSchema.parse(data);
   }
 
   private async _request(params: {

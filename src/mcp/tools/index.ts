@@ -3,6 +3,7 @@ import type { Esa } from "../../lib/esa/index.js";
 import {
   CreatePostParamsSchema,
   GetPostsParamsSchema,
+  UpdatePostParamsSchema,
 } from "../../lib/esa/types.js";
 
 export function registerTools(server: McpServer, esa: Esa) {
@@ -25,6 +26,19 @@ export function registerTools(server: McpServer, esa: Esa) {
     CreatePostParamsSchema.shape,
     async (params) => {
       const post = await esa.createPost(params);
+
+      return {
+        content: [{ type: "text", text: JSON.stringify(post) }],
+      };
+    },
+  );
+
+  server.tool(
+    "update_post",
+    "Update an existing post in the esa team. Requires a post number and optionally accepts updated content, tags, category, WIP status, and other metadata. Returns the updated post information.",
+    UpdatePostParamsSchema.shape,
+    async (params) => {
+      const post = await esa.updatePost(params);
 
       return {
         content: [{ type: "text", text: JSON.stringify(post) }],

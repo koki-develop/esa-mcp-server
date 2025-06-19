@@ -119,9 +119,45 @@ export const CreatePostParamsSchema = z.object({
 
 export const CreatePostResponseSchema = PostSchema;
 
+export const UpdatePostParamsSchema = z.object({
+  post_number: z.number().min(1).describe("Post number to update (required)."),
+  name: z
+    .string()
+    .optional()
+    .describe(
+      "Post title. Use &#35; for # and &#47; for / if needed in title.",
+    ),
+  body_md: z.string().optional().describe("Post content in Markdown format."),
+  tags: z
+    .array(z.string())
+    .optional()
+    .describe("Array of tags to be attached to the post."),
+  category: z
+    .string()
+    .optional()
+    .describe("Category path for the post (e.g., 'dev/2024/01/01')."),
+  wip: z
+    .boolean()
+    .optional()
+    .describe("Whether the post is in WIP (Work in Progress) state."),
+  message: z
+    .string()
+    .optional()
+    .describe("Commit message for the post update."),
+});
+
+export const UpdatePostResponseSchema = PostSchema.extend({
+  overlapped: z
+    .boolean()
+    .optional()
+    .describe("True if 3-way merge conflicts occurred."),
+});
+
 export type User = z.infer<typeof UserSchema>;
 export type Post = z.infer<typeof PostSchema>;
 export type GetPostsResponse = z.infer<typeof GetPostsResponseSchema>;
 export type GetPostsParams = z.infer<typeof GetPostsParamsSchema>;
 export type CreatePostParams = z.infer<typeof CreatePostParamsSchema>;
 export type CreatePostResponse = z.infer<typeof CreatePostResponseSchema>;
+export type UpdatePostParams = z.infer<typeof UpdatePostParamsSchema>;
+export type UpdatePostResponse = z.infer<typeof UpdatePostResponseSchema>;
