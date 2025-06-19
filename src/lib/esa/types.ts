@@ -6,6 +6,24 @@ export const UserSchema = z.object({
   screen_name: z.string(),
 });
 
+export const StargazerSchema = z.object({
+  created_at: z.string(),
+  body: z.string().nullable(),
+  user: UserSchema,
+});
+
+export const CommentSchema = z.object({
+  id: z.number(),
+  body_md: z.string(),
+  created_at: z.string(),
+  updated_at: z.string(),
+  url: z.string(),
+  created_by: UserSchema,
+  stargazers_count: z.number(),
+  star: z.boolean(),
+  stargazers: z.array(StargazerSchema).optional(),
+});
+
 export const PostSchema = z.object({
   number: z.number(),
   url: z.string(),
@@ -23,10 +41,14 @@ export const PostSchema = z.object({
   updated_by: UserSchema,
   kind: z.enum(["stock", "flow"]),
   comments_count: z.number(),
+  tasks_count: z.number().optional(),
+  done_tasks_count: z.number().optional(),
   stargazers_count: z.number(),
   watchers_count: z.number(),
   star: z.boolean(),
   watch: z.boolean(),
+  comments: z.array(CommentSchema).optional(),
+  stargazers: z.array(StargazerSchema).optional(),
 });
 
 export const GetPostsParamsSchema = z.object({
@@ -40,7 +62,7 @@ export const GetPostsParamsSchema = z.object({
     .string()
     .optional()
     .describe(
-      "Comma-separated list of additional data to include in response (e.g., 'comments', 'stargazers', 'comments,stargazers').",
+      "Comma-separated list of additional data to include in response (e.g., 'comments', 'stargazers', 'comments,stargazers', 'comments,comments.stargazers').",
     ),
   sort: z
     .enum([
@@ -83,6 +105,21 @@ export const GetPostsResponseSchema = z.object({
   page: z.number(),
   per_page: z.number(),
 });
+
+export const GetPostParamsSchema = z.object({
+  post_number: z
+    .number()
+    .min(1)
+    .describe("Post number to retrieve (required)."),
+  include: z
+    .string()
+    .optional()
+    .describe(
+      "Comma-separated list of additional data to include in response (e.g., 'comments', 'stargazers', 'comments,stargazers', 'comments,comments.stargazers').",
+    ),
+});
+
+export const GetPostResponseSchema = PostSchema;
 
 export const CreatePostParamsSchema = z.object({
   name: z
@@ -157,17 +194,6 @@ export const DeletePostParamsSchema = z.object({
   post_number: z.number().min(1).describe("Post number to delete (required)."),
 });
 
-export const CommentSchema = z.object({
-  id: z.number(),
-  body_md: z.string(),
-  created_at: z.string(),
-  updated_at: z.string(),
-  url: z.string(),
-  created_by: UserSchema,
-  stargazers_count: z.number(),
-  star: z.boolean(),
-});
-
 export const GetPostCommentsParamsSchema = z.object({
   post_number: z
     .number()
@@ -198,6 +224,7 @@ export const GetPostCommentsResponseSchema = z.object({
 export type User = z.infer<typeof UserSchema>;
 export type Post = z.infer<typeof PostSchema>;
 export type Comment = z.infer<typeof CommentSchema>;
+export type Stargazer = z.infer<typeof StargazerSchema>;
 export type GetPostsResponse = z.infer<typeof GetPostsResponseSchema>;
 export const TagSchema = z.object({
   name: z.string(),
@@ -236,6 +263,8 @@ export type GetPostCommentsParams = z.infer<typeof GetPostCommentsParamsSchema>;
 export type GetPostCommentsResponse = z.infer<
   typeof GetPostCommentsResponseSchema
 >;
+export type GetPostParams = z.infer<typeof GetPostParamsSchema>;
+export type GetPostResponse = z.infer<typeof GetPostResponseSchema>;
 export type CreatePostParams = z.infer<typeof CreatePostParamsSchema>;
 export type CreatePostResponse = z.infer<typeof CreatePostResponseSchema>;
 export type UpdatePostParams = z.infer<typeof UpdatePostParamsSchema>;
