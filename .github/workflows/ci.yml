@@ -81,9 +81,6 @@ jobs:
           persist-credentials: false
       - run: docker build -t mcp-server .
       - name: Test Docker container
-        env:
-          ESA_TEAM: dummy
-          ESA_ACCESS_TOKEN: dummy
         run: |
-          timeout 5s docker run --rm mcp-server || test $? = 124
+          timeout 5s docker run --rm -e ESA_TEAM=dummy -e ESA_ACCESS_TOKEN=dummy mcp-server || test $? = 124
           echo "✓ Docker container starts successfully"
