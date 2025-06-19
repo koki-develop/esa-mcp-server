@@ -39,6 +39,9 @@ bun add -D <package-name>  # Development dependencies
 - `src/index.ts` - Entry point (runs MCP protocol via stdio)
 - `src/server.ts` - MCP server implementation (server name, tool registration)
 - `src/mcp/tools/` - MCP tool definitions (implement each tool here)
+- `src/lib/esa/` - esa.io API client implementation
+  - `index.ts` - Esa class (API client)
+  - `types.ts` - Zod schemas and type definitions
 - `scripts/build.ts` - Bun build script (generates executable)
 
 ### Build System
@@ -54,11 +57,13 @@ bun add -D <package-name>  # Development dependencies
 
 ### Current Implementation Status
 - Basic MCP server structure implemented
-- `get_current_time` tool exists as a sample
-- esa.io API integration not yet implemented
+- esa.io API client (`Esa` class) with Bearer auth
+- `get_posts` tool - fetches posts with filtering, sorting, pagination
+- Environment variables: `ESA_TEAM`, `ESA_ACCESS_TOKEN`
 
 ## Important Notes
 - Code formatter is Biome (not ESLint)
 - Package manager is Bun (not npm or yarn)
 - TypeScript strict mode enabled
-- No test framework configured yet
+- Git hooks run Biome formatting on commit
+- All API inputs/outputs validated with Zod schemas
