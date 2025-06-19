@@ -112,7 +112,6 @@ export class Esa {
     query?: Record<string, string | number>;
     method: string;
     body?: Record<string, unknown>;
-    options?: RequestInit;
   }): Promise<Response> {
     const url = new URL("https://api.esa.io");
     url.pathname = path.join(url.pathname, params.path);
@@ -131,7 +130,6 @@ export class Esa {
         "Content-Type": "application/json",
       },
       body: params.body ? JSON.stringify(params.body) : undefined,
-      ...params.options,
     });
 
     if (!response.ok) {
