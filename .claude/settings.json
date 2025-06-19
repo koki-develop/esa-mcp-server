@@ -4,7 +4,8 @@
       "Bash(bun run lint:*)",
       "Bash(bun run fmt:*)",
       "Bash(bun run typecheck:*)",
-      "Bash(bun run build:*)"
+      "Bash(bun run build:*)",
+      "Bash(git rebase:*)"
     ],
     "deny": []
   }
