@@ -6,6 +6,12 @@ export const UserSchema = z.object({
   screen_name: z.string(),
 });
 
+export const StargazerSchema = z.object({
+  created_at: z.string(),
+  body: z.string().nullable(),
+  user: UserSchema,
+});
+
 export const CommentSchema = z.object({
   id: z.number(),
   body_md: z.string(),
@@ -15,12 +21,7 @@ export const CommentSchema = z.object({
   created_by: UserSchema,
   stargazers_count: z.number(),
   star: z.boolean(),
-});
-
-export const StargazerSchema = z.object({
-  created_at: z.string(),
-  body: z.string().nullable(),
-  user: UserSchema,
+  stargazers: z.array(StargazerSchema).optional(),
 });
 
 export const PostSchema = z.object({
@@ -61,7 +62,7 @@ export const GetPostsParamsSchema = z.object({
     .string()
     .optional()
     .describe(
-      "Comma-separated list of additional data to include in response (e.g., 'comments', 'stargazers', 'comments,stargazers').",
+      "Comma-separated list of additional data to include in response (e.g., 'comments', 'stargazers', 'comments,stargazers', 'comments,comments.stargazers').",
     ),
   sort: z
     .enum([
@@ -114,7 +115,7 @@ export const GetPostParamsSchema = z.object({
     .string()
     .optional()
     .describe(
-      "Comma-separated list of additional data to include in response (e.g., 'comments', 'stargazers', 'comments,stargazers').",
+      "Comma-separated list of additional data to include in response (e.g., 'comments', 'stargazers', 'comments,stargazers', 'comments,comments.stargazers').",
     ),
 });
 

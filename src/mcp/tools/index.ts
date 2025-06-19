@@ -13,7 +13,7 @@ import {
 export function registerTools(server: McpServer, esa: Esa) {
   server.tool(
     "get_posts",
-    "Retrieve a list of posts from the esa team. Supports search queries, filtering, sorting, and pagination. Returns post metadata including title, content, tags, categories, author information, and engagement metrics (comments, stars, watches). Optionally includes comments and stargazers with the include parameter.",
+    "Retrieve a list of posts from the esa team. Supports search queries, filtering, sorting, and pagination. Returns post metadata including title, content, tags, categories, author information, and engagement metrics (comments, stars, watches). Optionally includes comments and stargazers with the include parameter. Supports nested inclusion like 'comments,comments.stargazers'.",
     GetPostsParamsSchema.shape,
     async (params) => {
       const posts = await esa.getPosts(params);
@@ -26,7 +26,7 @@ export function registerTools(server: McpServer, esa: Esa) {
 
   server.tool(
     "get_post",
-    "Retrieve a specific post from the esa team by post number. Returns complete post details including title, content (markdown), tags, category, author information, revision history, and engagement metrics. Optionally includes comments and stargazers.",
+    "Retrieve a specific post from the esa team by post number. Returns complete post details including title, content (markdown), tags, category, author information, revision history, and engagement metrics. Optionally includes comments and stargazers. Supports nested inclusion like 'comments,comments.stargazers'.",
     GetPostParamsSchema.shape,
     async (params) => {
       const post = await esa.getPost(params);
