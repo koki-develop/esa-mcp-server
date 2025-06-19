@@ -4,7 +4,6 @@ export const UserSchema = z.object({
   myself: z.boolean(),
   name: z.string(),
   screen_name: z.string(),
-  icon: z.string(),
 });
 
 export const PostSchema = z.object({
@@ -16,7 +15,6 @@ export const PostSchema = z.object({
   full_name: z.string(),
   wip: z.boolean(),
   body_md: z.string(),
-  body_html: z.string(),
   created_at: z.string(),
   updated_at: z.string(),
   message: z.string(),
@@ -25,8 +23,6 @@ export const PostSchema = z.object({
   updated_by: UserSchema,
   kind: z.enum(["stock", "flow"]),
   comments_count: z.number(),
-  tasks_count: z.number(),
-  done_tasks_count: z.number(),
   stargazers_count: z.number(),
   watchers_count: z.number(),
   star: z.boolean(),
