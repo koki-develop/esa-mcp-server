@@ -63,6 +63,9 @@ jobs:
       - uses: ./.github/actions/setup
       - run: bun run build
       - name: Test built executable
+        env:
+          ESA_TEAM: dummy
+          ESA_ACCESS_TOKEN: dummy
         run: |
           timeout 5s bun dist/index.js || test $? = 124
           echo "✓ Server starts successfully"
@@ -78,6 +81,9 @@ jobs:
           persist-credentials: false
       - run: docker build -t mcp-server .
       - name: Test Docker container
+        env:
+          ESA_TEAM: dummy
+          ESA_ACCESS_TOKEN: dummy
         run: |
           timeout 5s docker run --rm mcp-server || test $? = 124
           echo "✓ Docker container starts successfully"
