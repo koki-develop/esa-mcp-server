@@ -5,7 +5,6 @@ import {
   type CreatePostResponse,
   CreatePostResponseSchema,
   type GetPostsParams,
-  GetPostsParamsSchema,
   type GetPostsResponse,
   GetPostsResponseSchema,
   type UpdatePostParams,
@@ -24,8 +23,6 @@ export class Esa {
   }
 
   async getPosts(params: GetPostsParams = {}): Promise<GetPostsResponse> {
-    GetPostsParamsSchema.parse(params);
-
     const response = await this._request({
       path: path.join("v1/teams", this._teamName, "posts"),
       method: "GET",
