@@ -54,6 +54,8 @@ Replace `<your-team-name>` and `<your-personal-access-token>` with your team nam
   - [get_posts](#get_posts)
   - [create_post](#create_post)
   - [update_post](#update_post)
+- [Tags](#tags)
+  - [get_tags](#get_tags)
 
 ### Posts
 
@@ -69,6 +71,11 @@ Create a new post in the esa team. Requires a title and optionally accepts conte
 
 Update an existing post in the esa team. Requires a post number and optionally accepts updated content, tags, category, WIP status, and other metadata. Returns the updated post information including revision details.
 
+### Tags
+
+#### `get_tags`
+
+Get a list of all tags used in the esa team. Returns tags with their names and the number of posts they are attached to, sorted by post count in descending order. Supports pagination.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

@@ -9,6 +9,10 @@ import {
   type UpdatePostParams,
   type UpdatePostResponse,
   UpdatePostResponseSchema,
+  type GetTagsParams,
+  GetTagsParamsSchema,
+  type GetTagsResponse,
+  GetTagsResponseSchema,
 } from "./types.js";
 
 export class Esa {
@@ -54,6 +58,18 @@ export class Esa {
     return UpdatePostResponseSchema.parse(data);
   }
 
+  async getTags(params: GetTagsParams): Promise<GetTagsResponse> {
+    GetTagsParamsSchema.parse(params);
+
+    const response = await this._request({
+      path: path.join("v1/teams", this._teamName, "tags"),
+      method: "GET",
+      query: params,
+    });
+
+    const data = await response.json();
+    return GetTagsResponseSchema.parse(data);
+  }
   private async _request(params: {
     path: string;
     query?: Record<string, string | number>;

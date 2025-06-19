@@ -4,6 +4,7 @@ import {
   CreatePostParamsSchema,
   GetPostsParamsSchema,
   UpdatePostParamsSchema,
+  GetTagsParamsSchema,
 } from "../../lib/esa/types.js";
 
 export function registerTools(server: McpServer, esa: Esa) {
@@ -42,6 +43,19 @@ export function registerTools(server: McpServer, esa: Esa) {
 
       return {
         content: [{ type: "text", text: JSON.stringify(post) }],
+      };
+    },
+  );
+
+  server.tool(
+    "get_tags",
+    "Get a list of all tags used in the esa team. Returns tags with their names and the number of posts they are attached to, sorted by post count in descending order. Supports pagination.",
+    GetTagsParamsSchema.shape,
+    async (params) => {
+      const tags = await esa.getTags(params);
+
+      return {
+        content: [{ type: "text", text: JSON.stringify(tags) }],
       };
     },
   );
