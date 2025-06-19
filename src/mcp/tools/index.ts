@@ -1,6 +1,7 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { Esa } from "../../lib/esa/index.js";
 import {
+  CreatePostCommentParamsSchema,
   CreatePostParamsSchema,
   DeletePostParamsSchema,
   GetPostCommentsParamsSchema,
@@ -62,6 +63,7 @@ export function registerTools(server: McpServer, esa: Esa) {
       };
     },
   );
+
   server.tool(
     "get_tags",
     "Get a list of all tags used in the esa team. Returns tags with their names and the number of posts they are attached to, sorted by post count in descending order. Supports pagination.",
@@ -102,6 +104,19 @@ export function registerTools(server: McpServer, esa: Esa) {
 
       return {
         content: [{ type: "text", text: JSON.stringify(comments) }],
+      };
+    },
+  );
+
+  server.tool(
+    "create_post_comment",
+    "Create a new comment on an existing post in the esa team. Requires a post number and comment content in Markdown format. Returns the created comment information including ID, content, timestamps, and author details.",
+    CreatePostCommentParamsSchema.shape,
+    async (params) => {
+      const comment = await esa.createPostComment(params);
+
+      return {
+        content: [{ type: "text", text: JSON.stringify(comment) }],
       };
     },
   );
