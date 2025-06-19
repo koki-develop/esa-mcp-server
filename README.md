@@ -40,7 +40,14 @@ Replace `<your-team-name>` and `<your-access-token>` with your team name and acc
 
 ## MCP Tools
 
-**TODO: Add MCP tools here**
+- [Posts](#posts)
+  - [get_posts](#get_posts)
+
+### Posts
+
+#### `get_posts`
+
+Retrieve a list of posts from the esa team. Supports search queries, filtering, sorting, and pagination. Returns post metadata including title, content, tags, categories, author information, and engagement metrics (comments, stars, watches).
 
 ## License
 
