@@ -4,7 +4,7 @@ import packageJson from "../package.json" with { type: "json" };
 import { Esa } from "./lib/esa";
 import { registerTools } from "./mcp/tools";
 
-export async function runServer() {
+export async function runServer(readonly: boolean) {
   const team = process.env.ESA_TEAM;
   const accessToken = process.env.ESA_ACCESS_TOKEN;
   if (!team || !accessToken) {
@@ -23,7 +23,7 @@ export async function runServer() {
   });
 
   // Register tools
-  registerTools(server, esa);
+  registerTools(server, esa, { readonly });
 
   // Start server
   const transport = new StdioServerTransport();

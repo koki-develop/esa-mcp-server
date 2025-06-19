@@ -74,10 +74,12 @@ bun add -D <package-name>  # Development dependencies
 - `delete_post` - deletes post
 - `get_tags` - fetches all tags
 - `get_post_comments` - fetches comments for a post
+- `create_post_comment` - creates comment on post (write operation)
+
+#### CLI Options
+- `--readonly` - Enable read-only mode that only allows read operations (get_posts, get_post, get_tags, get_post_comments). Write operations (create_post, update_post, delete_post, create_post_comment) are disabled when this flag is used.
 
 #### TODO (from TODO file)
-- `--readonly` flag support
-- `create_post_comment` - create comment on post
 - `update_comment` - update existing comment
 - `delete_comment` - delete comment
 

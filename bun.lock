@@ -5,6 +5,7 @@
       "name": "mcp-server",
       "dependencies": {
         "@modelcontextprotocol/sdk": "1.13.0",
+        "commander": "14.0.0",
         "zod": "3.25.67",
       },
       "devDependencies": {
