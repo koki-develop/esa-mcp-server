@@ -19,6 +19,9 @@ import {
   type GetTagsParams,
   type GetTagsResponse,
   GetTagsResponseSchema,
+  type UpdateCommentParams,
+  type UpdateCommentResponse,
+  UpdateCommentResponseSchema,
   type UpdatePostParams,
   type UpdatePostResponse,
   UpdatePostResponseSchema,
@@ -123,6 +126,20 @@ export class Esa {
 
     const data = await response.json();
     return CreatePostCommentResponseSchema.parse(data);
+  }
+
+  async updateComment(
+    params: UpdateCommentParams,
+  ): Promise<UpdateCommentResponse> {
+    const { comment_id, ...commentParams } = params;
+    const response = await this._request({
+      path: `/v1/teams/${this._teamName}/comments/${comment_id}`,
+      method: "PATCH",
+      body: { comment: commentParams },
+    });
+
+    const data = await response.json();
+    return UpdateCommentResponseSchema.parse(data);
   }
   private async _request(params: {
     path: string;

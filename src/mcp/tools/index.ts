@@ -8,6 +8,7 @@ import {
   GetPostParamsSchema,
   GetPostsParamsSchema,
   GetTagsParamsSchema,
+  UpdateCommentParamsSchema,
   UpdatePostParamsSchema,
 } from "../../lib/esa/types.js";
 
@@ -125,6 +126,19 @@ export function registerTools(
       CreatePostCommentParamsSchema.shape,
       async (params) => {
         const comment = await esa.createPostComment(params);
+
+        return {
+          content: [{ type: "text", text: JSON.stringify(comment) }],
+        };
+      },
+    );
+
+    server.tool(
+      "update_comment",
+      "Update an existing comment on a post in the esa team. Requires a comment ID and new content in Markdown format. Returns the updated comment information including content, timestamps, and author details.",
+      UpdateCommentParamsSchema.shape,
+      async (params) => {
+        const comment = await esa.updateComment(params);
 
         return {
           content: [{ type: "text", text: JSON.stringify(comment) }],

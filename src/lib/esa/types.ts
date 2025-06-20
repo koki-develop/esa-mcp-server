@@ -234,6 +234,16 @@ export const CreatePostCommentParamsSchema = z.object({
 });
 
 export const CreatePostCommentResponseSchema = CommentSchema;
+
+export const UpdateCommentParamsSchema = z.object({
+  comment_id: z.number().min(1).describe("Comment ID to update (required)."),
+  body_md: z
+    .string()
+    .min(1)
+    .describe("Updated comment content in Markdown format (required)."),
+});
+
+export const UpdateCommentResponseSchema = CommentSchema;
 export type User = z.infer<typeof UserSchema>;
 export type Post = z.infer<typeof PostSchema>;
 export type Comment = z.infer<typeof CommentSchema>;
@@ -289,3 +299,5 @@ export type CreatePostCommentParams = z.infer<
 export type CreatePostCommentResponse = z.infer<
   typeof CreatePostCommentResponseSchema
 >;
+export type UpdateCommentParams = z.infer<typeof UpdateCommentParamsSchema>;
+export type UpdateCommentResponse = z.infer<typeof UpdateCommentResponseSchema>;
