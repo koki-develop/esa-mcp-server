@@ -194,6 +194,10 @@ export const DeletePostParamsSchema = z.object({
   post_number: z.number().min(1).describe("Post number to delete (required)."),
 });
 
+export const DeleteCommentParamsSchema = z.object({
+  comment_id: z.number().min(1).describe("Comment ID to delete (required)."),
+});
+
 export const GetPostCommentsParamsSchema = z.object({
   post_number: z
     .number()
@@ -293,6 +297,7 @@ export type CreatePostResponse = z.infer<typeof CreatePostResponseSchema>;
 export type UpdatePostParams = z.infer<typeof UpdatePostParamsSchema>;
 export type UpdatePostResponse = z.infer<typeof UpdatePostResponseSchema>;
 export type DeletePostParams = z.infer<typeof DeletePostParamsSchema>;
+export type DeleteCommentParams = z.infer<typeof DeleteCommentParamsSchema>;
 export type CreatePostCommentParams = z.infer<
   typeof CreatePostCommentParamsSchema
 >;

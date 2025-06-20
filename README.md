@@ -82,7 +82,7 @@ In read-only mode, only the following operations are available:
 - `get_tags` - retrieve tags
 - `get_post_comments` - retrieve post comments
 
-Write operations (`create_post`, `update_post`, `delete_post`, `create_post_comment`, `update_comment`) are disabled.
+Write operations (`create_post`, `update_post`, `delete_post`, `create_post_comment`, `update_comment`, `delete_comment`) are disabled.
 
 ## MCP Tools
 
@@ -98,6 +98,7 @@ Write operations (`create_post`, `update_post`, `delete_post`, `create_post_comm
   - [`get_post_comments`](#get_post_comments)
   - [`create_post_comment`](#create_post_comment)
   - [`update_comment`](#update_comment)
+  - [`delete_comment`](#delete_comment)
 
 ### Posts
 
@@ -141,6 +142,9 @@ Create a new comment on an existing post in the esa team. Requires a post number
 
 Update an existing comment on a post in the esa team. Requires a comment ID and new content in Markdown format. Returns the updated comment information including content, timestamps, and author details.
 
+#### `delete_comment`
+
+Delete an existing comment from the esa team. Requires a comment ID. The comment will be permanently deleted and cannot be recovered. Returns a confirmation message upon successful deletion.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

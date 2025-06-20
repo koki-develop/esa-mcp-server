@@ -3,6 +3,7 @@ import type { Esa } from "../../lib/esa/index.js";
 import {
   CreatePostCommentParamsSchema,
   CreatePostParamsSchema,
+  DeleteCommentParamsSchema,
   DeletePostParamsSchema,
   GetPostCommentsParamsSchema,
   GetPostParamsSchema,
@@ -142,6 +143,24 @@ export function registerTools(
 
         return {
           content: [{ type: "text", text: JSON.stringify(comment) }],
+        };
+      },
+    );
+
+    server.tool(
+      "delete_comment",
+      "Delete an existing comment from the esa team. Requires a comment ID. The comment will be permanently deleted and cannot be recovered.",
+      DeleteCommentParamsSchema.shape,
+      async (params) => {
+        await esa.deleteComment(params);
+
+        return {
+          content: [
+            {
+              type: "text",
+              text: `Comment #${params.comment_id} has been successfully deleted.`,
+            },
+          ],
         };
       },
     );
