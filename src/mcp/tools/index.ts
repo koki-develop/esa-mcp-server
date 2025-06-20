@@ -71,22 +71,6 @@ export function registerTools(
         };
       },
     );
-  }
-  server.tool(
-    "get_tags",
-    "Get a list of all tags used in the esa team. Returns tags with their names and the number of posts they are attached to, sorted by post count in descending order. Supports pagination.",
-    GetTagsParamsSchema.shape,
-    async (params) => {
-      const tags = await esa.getTags(params);
-
-      return {
-        content: [{ type: "text", text: JSON.stringify(tags) }],
-      };
-    },
-  );
-
-  // Delete operation - only available when not in readonly mode
-  if (!options.readonly) {
     server.tool(
       "delete_post",
       "Delete an existing post from the esa team. Requires a post number. The post will be permanently deleted and cannot be recovered.",
@@ -105,6 +89,18 @@ export function registerTools(
       },
     );
   }
+  server.tool(
+    "get_tags",
+    "Get a list of all tags used in the esa team. Returns tags with their names and the number of posts they are attached to, sorted by post count in descending order. Supports pagination.",
+    GetTagsParamsSchema.shape,
+    async (params) => {
+      const tags = await esa.getTags(params);
+
+      return {
+        content: [{ type: "text", text: JSON.stringify(tags) }],
+      };
+    },
+  );
 
   server.tool(
     "get_post_comments",
