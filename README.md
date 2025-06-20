@@ -1,4 +1,4 @@
-# Esa MCP Server
+# esa MCP Server
 
 [![Version](https://img.shields.io/github/v/release/koki-develop/esa-mcp-server)](https://github.com/koki-develop/esa-mcp-server/releases/latest)
 [![License](https://img.shields.io/github/license/koki-develop/esa-mcp-server)](./LICENSE)
