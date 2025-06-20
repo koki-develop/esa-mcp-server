@@ -75,13 +75,11 @@ bun add -D <package-name>  # Development dependencies
 - `get_tags` - fetches all tags
 - `get_post_comments` - fetches comments for a post
 - `create_post_comment` - creates comment on post (write operation)
+- `update_comment` - updates existing comment
+- `delete_comment` - deletes comment
 
 #### CLI Options
-- `--readonly` - Enable read-only mode that only allows read operations (get_posts, get_post, get_tags, get_post_comments). Write operations (create_post, update_post, delete_post, create_post_comment) are disabled when this flag is used.
-
-#### TODO (from TODO file)
-- `update_comment` - update existing comment
-- `delete_comment` - delete comment
+- `--readonly` - Enable read-only mode that only allows read operations (get_posts, get_post, get_tags, get_post_comments). Write operations (create_post, update_post, delete_post, create_post_comment, update_comment, delete_comment) are disabled when this flag is used.
 
 ## Important Notes
 - Code formatter is Biome (not ESLint)
