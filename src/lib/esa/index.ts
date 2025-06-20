@@ -6,6 +6,7 @@ import {
   type CreatePostParams,
   type CreatePostResponse,
   CreatePostResponseSchema,
+  type DeleteCommentParams,
   type DeletePostParams,
   type GetPostCommentsParams,
   type GetPostCommentsResponse,
@@ -140,6 +141,13 @@ export class Esa {
 
     const data = await response.json();
     return UpdateCommentResponseSchema.parse(data);
+  }
+
+  async deleteComment(params: DeleteCommentParams): Promise<void> {
+    await this._request({
+      path: `/v1/teams/${this._teamName}/comments/${params.comment_id}`,
+      method: "DELETE",
+    });
   }
   private async _request(params: {
     path: string;
