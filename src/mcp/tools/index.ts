@@ -20,13 +20,34 @@ export function registerTools(
 ) {
   server.tool(
     "get_posts",
-    "Retrieve a list of posts from the esa team. Supports search queries, filtering, sorting, and pagination. Returns post metadata including title, content, tags, categories, author information, and engagement metrics (comments, stars, watches). Optionally includes comments and stargazers with the include parameter. Supports nested inclusion like 'comments,comments.stargazers'.",
+    "Retrieve a list of posts from the esa team. Supports search queries, filtering, sorting, and pagination. Returns post metadata including title, content, tags, categories, author information, and engagement metrics (comments, stars, watches). Optionally includes comments and stargazers with the include parameter. Supports nested inclusion like 'comments,comments.stargazers'. Note: body_md is truncated to 300 characters with body_truncated field indicating if truncation occurred.",
     GetPostsParamsSchema.shape,
     async (params) => {
       const posts = await esa.getPosts(params);
 
+      // Truncate body_md for each post to save context
+      const postsWithTruncation = {
+        ...posts,
+        posts: posts.posts.map((post) => {
+          const maxLength = 300;
+
+          if (post.body_md.length <= maxLength) {
+            return {
+              ...post,
+              body_truncated: false,
+            };
+          }
+
+          return {
+            ...post,
+            body_md: `${post.body_md.substring(0, maxLength)}...`,
+            body_truncated: true,
+          };
+        }),
+      };
+
       return {
-        content: [{ type: "text", text: JSON.stringify(posts) }],
+        content: [{ type: "text", text: JSON.stringify(postsWithTruncation) }],
       };
     },
   );

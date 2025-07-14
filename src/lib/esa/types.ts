@@ -33,6 +33,7 @@ export const PostSchema = z.object({
   full_name: z.string(),
   wip: z.boolean(),
   body_md: z.string(),
+  body_truncated: z.boolean(),
   created_at: z.string(),
   updated_at: z.string(),
   message: z.string(),
