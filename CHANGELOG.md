@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/koki-develop/esa-mcp-server/compare/v0.2.0...v0.3.0) (2025-07-14)
+
+
+### Features
+
+* Add body truncation to get_posts tool to reduce context size ([07fd44c](https://github.com/koki-develop/esa-mcp-server/commit/07fd44c998ff4050d285736fa35075a07b3fd757))
+
 ## [0.2.0](https://github.com/koki-develop/esa-mcp-server/compare/v0.1.0...v0.2.0) (2025-06-20)
 
 
