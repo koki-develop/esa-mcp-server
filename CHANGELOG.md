@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/koki-develop/esa-mcp-server/compare/v0.3.0...v0.3.1) (2025-08-22)
+
+
+### Bug Fixes
+
+* Remove `body_truncated` from PostSchema ([68b8f42](https://github.com/koki-develop/esa-mcp-server/commit/68b8f4265bf6844021281682b95d25c912d6f9f1))
+
 ## [0.3.0](https://github.com/koki-develop/esa-mcp-server/compare/v0.2.0...v0.3.0) (2025-07-14)
 
 
