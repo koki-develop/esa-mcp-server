@@ -39,11 +39,15 @@ To use this server with an MCP client, add the following configuration:
         "-i",
         "--rm",
         "-e",
-        "ESA_TEAM=<your-team-name>",
+        "ESA_TEAM",
         "-e",
-        "ESA_ACCESS_TOKEN=<your-personal-access-token>",
+        "ESA_ACCESS_TOKEN",
         "ghcr.io/koki-develop/esa-mcp-server:latest"
-      ]
+      ],
+      "env": {
+        "ESA_TEAM": "<your-team-name>",
+        "ESA_ACCESS_TOKEN": "<your-personal-access-token>"
+      }
     }
   }
 }
@@ -58,19 +62,23 @@ To enable read-only mode that only allows read operations, add the `--readonly` 
 ```json
 {
   "mcpServers": {
-    "esa-readonly": {
+    "esa": {
       "command": "docker",
       "args": [
         "run",
         "-i",
         "--rm",
         "-e",
-        "ESA_TEAM=<your-team-name>",
+        "ESA_TEAM",
         "-e",
-        "ESA_ACCESS_TOKEN=<your-personal-access-token>",
+        "ESA_ACCESS_TOKEN",
         "ghcr.io/koki-develop/esa-mcp-server:latest",
         "--readonly"
-      ]
+      ],
+      "env": {
+        "ESA_TEAM": "<your-team-name>",
+        "ESA_ACCESS_TOKEN": "<your-personal-access-token>"
+      }
     }
   }
 }
