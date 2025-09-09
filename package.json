@@ -1,5 +1,5 @@
 {
-  "name": "mcp-server",
+  "name": "@koki-develop/esa-mcp-server",
   "module": "index.ts",
   "type": "module",
   "private": true,

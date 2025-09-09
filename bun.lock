@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "mcp-server",
+      "name": "@koki-develop/esa-mcp-server",
       "dependencies": {
         "@modelcontextprotocol/sdk": "1.13.0",
         "commander": "14.0.0",
