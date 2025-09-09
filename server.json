@@ -4,7 +4,7 @@
   "description": "A Model Context Protocol (MCP) server for esa.io",
   "status": "active",
   "repository": {
-    "url": "ssh://git@github.com/koki-develop/esa-mcp-server",
+    "url": "https://github.com/koki-develop/esa-mcp-server.git",
     "source": "github"
   },
   "version": "0.3.1",
