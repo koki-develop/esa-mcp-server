@@ -32,11 +32,11 @@ RUN bun run build
 # ============================================================================
 FROM base AS release
 COPY --from=install /temp/prod/node_modules node_modules
-COPY --from=build /usr/src/app/dist ./dist
+COPY --from=build /usr/src/app/dist/docker ./dist/docker
 COPY --from=build /usr/src/app/package.json .
 
 # Run as non-root user
 USER bun
 
 # Run the MCP server
-ENTRYPOINT ["bun", "run", "dist/index.js"]
+ENTRYPOINT ["bun", "run", "dist/docker/index.js"]
