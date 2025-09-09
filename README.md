@@ -9,6 +9,11 @@ A Model Context Protocol (MCP) server for [esa.io](https://esa.io).
 ## Table of Contents
 
 - [Usage](#usage)
+  - [Prerequisites](#prerequisites)
+  - [Configuration](#configuration)
+    - [Using npx](#using-npx)
+    - [Using Docker](#using-docker)
+  - [Read-only Mode](#read-only-mode)
 - [MCP Tools](#mcp-tools)
   - [Posts](#posts)
   - [Tags](#tags)
@@ -27,7 +32,35 @@ Before using this MCP server, you need to generate a personal access token from 
 
 ### Configuration
 
-To use this server with an MCP client, add the following configuration:
+You can run the server either via npx or Docker.
+
+#### Using npx
+
+Add the following configuration to your MCP client:
+
+```json
+{
+  "mcpServers": {
+    "esa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@koki-develop/esa-mcp-server@latest"
+      ],
+      "env": {
+        "ESA_TEAM": "<your-team-name>",
+        "ESA_ACCESS_TOKEN": "<your-personal-access-token>"
+      }
+    }
+  }
+}
+```
+
+Replace `<your-team-name>` and `<your-personal-access-token>` with your team name and personal access token.
+
+#### Using Docker
+
+If you prefer Docker, use the following configuration:
 
 ```json
 {
@@ -53,11 +86,32 @@ To use this server with an MCP client, add the following configuration:
 }
 ```
 
-Replace `<your-team-name>` and `<your-personal-access-token>` with your team name and personal access token.
-
 #### Read-only Mode
 
-To enable read-only mode that only allows read operations, add the `--readonly` flag:
+To enable read-only mode that only allows read operations, add the `--readonly` flag.
+
+Using npx:
+
+```json
+{
+  "mcpServers": {
+    "esa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@koki-develop/esa-mcp-server@latest",
+        "--readonly"
+      ],
+      "env": {
+        "ESA_TEAM": "<your-team-name>",
+        "ESA_ACCESS_TOKEN": "<your-personal-access-token>"
+      }
+    }
+  }
+}
+```
+
+Using Docker:
 
 ```json
 {
