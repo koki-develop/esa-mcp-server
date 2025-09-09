@@ -2,8 +2,20 @@
   "name": "@koki-develop/esa-mcp-server",
   "module": "index.ts",
   "type": "module",
-  "private": true,
   "version": "0.3.1",
+  "author": "koki-develop <kou.pg.0131@gmail.com>",
+  "homepage": "https://github.com/koki-develop/esa-mcp-server",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koki-develop/esa-mcp-server.git"
+  },
+  "license": "MIT",
+  "bin": {
+    "esa-mcp-server": "dist/npm/index.js"
+  },
+  "files": [
+    "dist/npm"
+  ],
   "scripts": {
     "prepare": "husky || true",
     "build": "bun run ./scripts/build.ts",
@@ -11,7 +23,7 @@
     "fmt": "biome check --write --unsafe .",
     "typecheck": "tsc --noEmit",
     "preinspector": "bun run build",
-    "inspector": "mcp-inspector bun run ./dist/index.js"
+    "inspector": "mcp-inspector node ./dist/npm/index.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.13.0",
