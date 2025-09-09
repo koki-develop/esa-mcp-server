@@ -67,7 +67,10 @@ jobs:
           ESA_TEAM: dummy
           ESA_ACCESS_TOKEN: dummy
         run: |
-          timeout 5s bun dist/index.js || test $? = 124
+          timeout 5s bun dist/npm/index.js || test $? = 124
+          echo "✓ Server starts successfully"
+
+          timeout 5s bun dist/docker/index.js || test $? = 124
           echo "✓ Server starts successfully"
 
   docker:
