@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/koki-develop/esa-mcp-server/compare/v0.3.1...v0.3.2) (2025-09-09)
+
+
+### Bug Fixes
+
+* Publish to mcp registry ([#16](https://github.com/koki-develop/esa-mcp-server/issues/16)) ([173c065](https://github.com/koki-develop/esa-mcp-server/commit/173c0658f05730c6738bceeb34b800ac2845c265))
+
 ## [0.3.1](https://github.com/koki-develop/esa-mcp-server/compare/v0.3.0...v0.3.1) (2025-08-22)
 
 
