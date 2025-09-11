@@ -21,3 +21,6 @@ coverage
 
 # env files
 .envrc
+
+# mcp registry
+.mcpregistry*
