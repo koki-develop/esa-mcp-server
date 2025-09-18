@@ -1,7 +1,7 @@
 > [!IMPORTANT]
 > An official MCP server has been released. Please use the official server going forward.
 >
-> [esa公式のローカルMCPサーバーを公開しました - ReleaseNotes/2025/09/17 - docs.esa.io](https://docs.esa.io/posts/561)
+> - [esa公式のローカルMCPサーバーを公開しました - ReleaseNotes/2025/09/17 - docs.esa.io](https://docs.esa.io/posts/561)
 
 # esa MCP Server
 
